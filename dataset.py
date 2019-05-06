@@ -5,7 +5,6 @@ import chainer
 import cv2
 import numpy as np
 from PIL import Image
-
 from settings import IMAGE_DIR
 
 

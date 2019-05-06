@@ -6,11 +6,10 @@ from pathlib import Path
 import chainer
 from chainer import training
 from chainer.training import extensions
-from sklearn.model_selection import train_test_split
-
 from dataset import PoseDataset
 from model import PoseModelBase
 from settings import COORDINATES_DIR, SEED
+from sklearn.model_selection import train_test_split
 from util import set_random_seed
 
 

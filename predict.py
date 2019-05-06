@@ -3,11 +3,10 @@ import os
 from pathlib import Path
 
 import chainer
-from sklearn.model_selection import train_test_split
-
 from dataset import PoseDataset
 from model import PoseModelBase
 from settings import COORDINATES_DIR, SEED
+from sklearn.model_selection import train_test_split
 from util import save_predicted_images
 
 TRAIN_RESULT = 'result'

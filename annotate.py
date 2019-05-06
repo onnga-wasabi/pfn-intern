@@ -1,7 +1,7 @@
+import argparse
 import copy
 
 import cv2
-
 import util
 from finger import Finger, setup_fingers
 from settings import FINGER_TYPES, WINDOW_SIZE
@@ -75,18 +75,27 @@ def setup_window():
     cv2.resizeWindow('image', WINDOW_SIZE, WINDOW_SIZE)
 
 
+def parse():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-p', '--pred', action='store_true')
+    return parser.parse_args()
+
+
 if __name__ == '__main__':
 
+    args = parse()
     imgs = [(cv2.resize(cv2.imread(str(fname)), (224, 224)), fname) for fname in util.get_files()]
     if not imgs:
         print('No data requires annotation')
         import sys
         sys.exit()
 
-    base_img, fname = imgs.pop()
-    fingers = setup_fingers()
-
     mode = VIEW
+    base_img, fname = imgs.pop()
+    if args.pred:
+        fingers = setup_fingers(util.load_coordinates(fname))
+    else:
+        fingers = setup_fingers()
     setup_window()
     update_window(fingers)
 
@@ -109,7 +118,10 @@ if __name__ == '__main__':
                     break
                 mode = VIEW
                 base_img, fname = imgs.pop()
-                fingers = setup_fingers()
+                if args.pred:
+                    fingers = setup_fingers(util.load_coordinates(fname))
+                else:
+                    fingers = setup_fingers()
                 update_window(fingers)
 
             elif k in range(ord('0'), ord('5')):

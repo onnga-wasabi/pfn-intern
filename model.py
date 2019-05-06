@@ -1,7 +1,6 @@
 import chainer
 import chainer.functions as F
 import chainer.links as L
-
 from loss import weighted_mean_absolute_error
 
 

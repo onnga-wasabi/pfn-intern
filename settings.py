@@ -33,3 +33,4 @@ ANNOTATED_LOG = 'data/annotated.log'
 if not os.path.exists(ANNOTATED_LOG):
     with open(ANNOTATED_LOG, 'w') as wf:
         wf.write('')
+PRED_COORDINATES_DIR = 'data/pred_coordinates'
