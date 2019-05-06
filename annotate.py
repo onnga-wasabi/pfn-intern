@@ -77,7 +77,7 @@ def setup_window():
 
 if __name__ == '__main__':
 
-    imgs = [(util.preprocess(cv2.imread(str(fname))), fname) for fname in util.get_files()]
+    imgs = [(cv2.resize(cv2.imread(str(fname)), (224, 224)), fname) for fname in util.get_files()]
     if not imgs:
         print('No data requires annotation')
         import sys
