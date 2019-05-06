@@ -93,9 +93,9 @@ if __name__ == '__main__':
     mode = VIEW
     base_img, fname = imgs.pop()
     if args.pred:
-        coordinates = util.load_coordinates(fname)
-        if coordinates is not None:
-            fingers = setup_fingers(util.load_coordinates(fname))
+        coordinates = util.load_coordinates(fname.name)
+        if coordinates:
+            fingers = setup_fingers(coordinates=coordinates)
     else:
         fingers = setup_fingers()
     setup_window()
@@ -121,9 +121,9 @@ if __name__ == '__main__':
                 mode = VIEW
                 base_img, fname = imgs.pop()
                 if args.pred:
-                    coordinates = util.load_coordinates(fname)
-                    if coordinates is not None:
-                        fingers = setup_fingers(util.load_coordinates(fname))
+                    coordinates = util.load_coordinates(fname.name)
+                    if coordinates:
+                        fingers = setup_fingers(coordinates=coordinates)
                 else:
                     fingers = setup_fingers()
                 update_window(fingers)

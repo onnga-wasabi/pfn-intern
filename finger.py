@@ -26,7 +26,7 @@ class Finger(object):
 
 
 def setup_fingers(colors=COLORS, coordinates=DEFAULT_POSITIONS):
-    fingers = [Finger(c) for c in COLORS]
+    fingers = [Finger(c) for c in colors]
     for i, finger in enumerate(fingers):
         [finger.add_point(p) for p in coordinates[i]]
     return fingers
