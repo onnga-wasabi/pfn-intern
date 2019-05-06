@@ -89,7 +89,6 @@ if __name__ == '__main__':
     mode = VIEW
     setup_window()
     update_window(fingers)
-    count = 0
 
     while(True):
         cv2.imshow('image', img)
@@ -110,8 +109,6 @@ if __name__ == '__main__':
                     break
                 mode = VIEW
                 base_img, fname = imgs.pop()
-                count += 1
-                print(count)
                 fingers = setup_fingers()
                 update_window(fingers)
 
