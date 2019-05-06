@@ -36,9 +36,11 @@ def save_coordinates(fingers, fname, dir_path=COORDINATES_DIR, log=ANNOTATED_LOG
 
 def load_coordinates(fname, dir_path=PRED_COORDINATES_DIR):
     load_name = Path(fname.split('.')[0] + '.json')
-    with open(dir_path / load_name, 'r') as rf:
-        pred = json.load(rf)
-    coordinates = [pred[finger_type] for finger_type in FINGER_TYPES]
+    coordinates = []
+    if (dir_path / load_name).exists():
+        with open(dir_path / load_name, 'r') as rf:
+            pred = json.load(rf)
+        coordinates = [pred[finger_type] for finger_type in FINGER_TYPES]
     return coordinates
 
 
@@ -80,7 +82,7 @@ def save_predicted_images(model, dataset, files, gpu=-1, prefix=''):
             cv2.imwrite(f'{prefix}pred_{fname}.png', img)
 
 
-def save_predicted_coordinates(model, dataset, files, gpu=-1, prefix=''):
+def save_predicted_coordinates(model, dataset, files, gpu=-1):
     device = chainer.get_device(gpu)
     device.use()
     model.to_device(device)
@@ -102,4 +104,4 @@ def save_predicted_coordinates(model, dataset, files, gpu=-1, prefix=''):
                 fingers[finger_idx].add_point((x, y))
                 if (i + 1) % 4 == 0:
                     finger_idx += 1
-            save_coordinates(fingers, fname, dir_path=PRED_COORDINATES_DIR, log=None)
+            save_coordinates(fingers, fname.name, dir_path=PRED_COORDINATES_DIR, log=None)
